@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="3hm381wUGV02IDU2JqMSG5bfNcaqs8GIoKFdUtvMswU" />
+    
+    <title>Crown Battle - Gaming Tournament Arena</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0a0e17;
+            --secondary: #1a2238;
+            --accent: #ff6b35;
+            --accent-light: #ff8e6b;
+            --text: #ffffff;
+            --text-secondary: #b0b7c3;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(10, 14, 23, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            color: var(--accent);
+            font-size: 32px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDApIj48cmVjdCB3aWR0aD0iMiIgaGVpZ2h0PSI0MCIgZmlsbD0icmdiYSgyNTUsIDEwNywgNTMsIDAuMSkiPjwvcmVjdD48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybl8wKSI+PC9yZWN0Pjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-text h2 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text h2 span {
+            color: var(--accent);
+        }
+        
+        .hero-text p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
+            color: white;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+        }
+        
+        .app-preview {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--accent);
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 80px 0;
+            background-color: var(--secondary);
+            text-align: center;
+        }
+        
+        .trust-section h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--text);
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .trust-badge {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px 20px;
+            width: 180px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+        
+        .trust-badge:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        
+        .trust-badge i {
+            font-size: 42px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .trust-badge h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: var(--secondary);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 107, 53, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        
+        .feature-card i {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+        
+        /* Download Section */
+        .download-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            text-align: center;
+        }
+        
+        .download-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .download-section p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        
+        .download-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
+            color: white;
+            padding: 22px 50px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+            margin-top: 20px;
+        }
+        
+        .download-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+        }
+        
+        .file-size {
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #070a12;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-links h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text h2 {
+                font-size: 42px;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-top: 1px solid rgba(255, 107, 53, 0.3);
+            }
+            
+            nav.active ul {
+                display: flex;
+            }
+            
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero-text h2 {
+                font-size: 36px;
+            }
+            
+            .trust-badges {
+                gap: 20px;
+            }
+            
+            .trust-badge {
+                width: 150px;
+                padding: 20px 15px;
+            }
+            
+            .download-box {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-text h2 {
+                font-size: 32px;
+            }
+            
+            .hero-text p {
+                font-size: 18px;
+            }
+            
+            .cta-button, .download-button {
+                padding: 16px 30px;
+                font-size: 18px;
+            }
+            
+            .features h2, .trust-section h2 {
+                font-size: 30px;
+            }
+            
+            .download-section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h1>CROWN BATTLE</h1>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#tournaments">Tournaments</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h2>ENTER THE <span>BATTLE ARENA</span><br>COMPETE FOR THE CROWN</h2>
+                <p>Crown Battle is the ultimate gaming tournament platform where players compete in epic battles for glory, recognition, and massive prizes. Join thousands of gamers in daily tournaments.</p>
+                <a href="#download" class="cta-button">DOWNLOAD NOW <i class="fas fa-download"></i></a>
+            </div>
+            <div class="hero-image">
+                <img src="https://i.ibb.co/zH57TBH6/IMG-20260126-103549.png" class="app-preview">
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="container">
+            <h2>TRUSTED BY GAMERS WORLDWIDE</h2>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>100% Secure</h3>
+                    <p>Safe & Protected</p>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-trophy"></i>
+                    <h3>500+ Tournaments</h3>
+                    <p>Daily Events</p>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-users"></i>
+                    <h3>50K+ Players</h3>
+                    <p>Active Community</p>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-award"></i>
+                    <h3>Verified Prizes</h3>
+                    <p>Guaranteed Rewards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>PREMIUM TOURNAMENT FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Multiple Games</h3>
+                    <p>Battle across various popular game titles in one platform. From shooters to strategy games.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Real Cash Prizes</h3>
+                    <p>Win real money and exclusive rewards in our daily and weekly tournaments.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Live Leaderboards</h3>
+                    <p>Track your progress in real-time and see where you stand against competitors.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-broadcast-tower"></i>
+                    <h3>Live Streaming</h3>
+                    <p>Stream your gameplay directly to the community and build your fanbase.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Team Battles</h3>
+                    <p>Form squads with friends and compete in team-based tournament events.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Fair Play System</h3>
+                    <p>Advanced anti-cheat ensures all players compete on a level playing field.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section" id="download">
+        <div class="container">
+            <h2>DOWNLOAD CROWN BATTLE NOW</h2>
+            <p>Join the ultimate gaming tournament platform. Download the APK and start competing in minutes.</p>
+            
+            <div class="download-box">
+                <h3>Official APK Download</h3>
+                <p>Get direct access to all tournaments and features</p>
+                
+                <a href="https://www.mediafire.com/file/2waqnezx360bjlu/Crown+Battle.apk/file" class="download-button" target="_blank">
+                    <i class="fas fa-download"></i> DOWNLOAD APK
+                </a>
+                
+                <div class="file-size">
+                    <p><i class="fas fa-info-circle"></i> File Size: 85 MB | Version: 2.4.1 | Last Updated: June 2023</p>
+                </div>
+                
+                <div style="margin-top: 40px; padding: 20px; background: rgba(255,107,53,0.1); border-radius: 10px;">
+                    <h4><i class="fas fa-shield-alt"></i> Safe & Secure Download</h4>
+                    <p>Our APK is 100% free from malware and viruses. Download with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h1>CROWN BATTLE</h1>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--text-secondary); max-width: 400px;">The premier gaming tournament platform where champions are born and legends are made. Join the battle today.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#tournaments">Tournaments</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="alert('Crown Battle FAQ: \n1. How to join? Download APK and register.\n2. Is it free? Yes, entry is free for many events.\n3. Prize withdrawal? Real cash via UPI/Bank.')">FAQ</a></li>
+                        <li><a href="javascript:void(0)" onclick="alert('Guidelines: \n1. No Cheating.\n2. Respect Players.\n3. One account per user.')">Community Guidelines</a></li>
+                        <li><a href="javascript:void(0)" onclick="alert('Privacy Policy: \nYour data is secure with us. We only use your info for tournament updates and payments.')">Privacy Policy</a></li>
+                        <li><a href="javascript:void(0)" onclick="alert('Terms: \nBy using this app, you agree to our fair play policy and age restrictions.')">Terms of Service</a></li>
+                        <li><a href="mailto:anisoow8@gmail.com">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Crown Battle Gaming Tournament Arena. All rights reserved.</p>
+                <p style="margin-top: 10px;">Designed for gamers by gamers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Close mobile menu if open
+                    mainNav.classList.remove('active');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if(window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
